@@ -28,6 +28,7 @@ open class YAxis: AxisBase
     {
         case outsideChart
         case insideChart
+        case outsideOuterChart
     }
     
     ///  Enum that specifies the axis a DataSet should be plotted against, either Left or Right.
@@ -75,6 +76,8 @@ open class YAxis: AxisBase
     
     /// the side this axis object represents
     fileprivate var _axisDependency = AxisDependency.left
+    
+    open var extendGridlines = false
     
     /// the minimum width that the axis should take
     /// 
@@ -126,7 +129,7 @@ open class YAxis: AxisBase
     /// - returns: `true` if this axis needs horizontal offset, `false` ifno offset is needed.
     open var needsOffset: Bool
     {
-        if isEnabled && isDrawLabelsEnabled && labelPosition == .outsideChart
+        if isEnabled && isDrawLabelsEnabled && labelPosition != .insideChart
         {
             return true
         }

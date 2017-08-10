@@ -53,6 +53,9 @@ open class YAxisRenderer: AxisRendererBase
             {
                 textAlign = .right
                 xPos = viewPortHandler.offsetLeft - xoffset
+            } else if labelPosition == .outsideOuterChart {
+                textAlign = .left
+                xPos = xoffset
             }
             else
             {
@@ -67,6 +70,9 @@ open class YAxisRenderer: AxisRendererBase
             {
                 textAlign = .left
                 xPos = viewPortHandler.contentRight + xoffset
+            } else if labelPosition == .outsideOuterChart {
+                textAlign = .right
+                xPos = viewPortHandler.chartWidth - xoffset
             }
             else
             {
@@ -174,7 +180,10 @@ open class YAxisRenderer: AxisRendererBase
             
             context.saveGState()
             defer { context.restoreGState() }
-            context.clip(to: self.gridClippingRect)
+            if !yAxis.extendGridlines
+            {
+                context.clip(to: self.gridClippingRect)
+            }
             
             context.setShouldAntialias(yAxis.gridAntialiasEnabled)
             context.setStrokeColor(yAxis.gridColor.cgColor)
@@ -219,12 +228,25 @@ open class YAxisRenderer: AxisRendererBase
         position: CGPoint)
     {
         guard
+            let yAxis = self.axis as? YAxis,
             let viewPortHandler = self.viewPortHandler
             else { return }
         
+        let xoffset = yAxis.xOffset;
         context.beginPath()
-        context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: position.y))
-        context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: position.y))
+        if yAxis.extendGridlines {
+            if yAxis.axisDependency == .left {
+                context.move(to: CGPoint(x: xoffset, y: position.y))
+                context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: position.y))
+            } else {
+                context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: position.y))
+                context.addLine(to: CGPoint(x: viewPortHandler.chartWidth - xoffset, y: position.y))
+            }
+        } else {
+            context.move(to: CGPoint(x: viewPortHandler.contentLeft, y: position.y))
+            context.addLine(to: CGPoint(x: viewPortHandler.contentRight, y: position.y))
+        }
+
         context.strokePath()
     }
     
