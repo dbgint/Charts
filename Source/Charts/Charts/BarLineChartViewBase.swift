@@ -1537,7 +1537,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
         }
     }
 
-    open var _dragXEnabled: Bool {
+    open var dragXEnabled: Bool {
         get
         {
             return _dragXEnabled
