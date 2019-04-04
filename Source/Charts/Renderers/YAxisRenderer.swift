@@ -19,7 +19,7 @@ import CoreGraphics
 @objc(ChartYAxisRenderer)
 open class YAxisRenderer: AxisRendererBase
 {
-    public init(viewPortHandler: ViewPortHandler?, yAxis: YAxis?, transformer: Transformer?)
+    @objc public init(viewPortHandler: ViewPortHandler?, yAxis: YAxis?, transformer: Transformer?)
     {
         super.init(viewPortHandler: viewPortHandler, transformer: transformer, axis: yAxis)
     }
@@ -133,7 +133,7 @@ open class YAxisRenderer: AxisRendererBase
     }
     
     /// draws the y-labels on the specified x-position
-    internal func drawYLabels(
+    @objc internal func drawYLabels(
         context: CGContext,
         fixedPosition: CGFloat,
         positions: [CGPoint],
@@ -159,7 +159,7 @@ open class YAxisRenderer: AxisRendererBase
                 text: text,
                 point: CGPoint(x: fixedPosition, y: positions[i].y + offset),
                 align: textAlign,
-                attributes: [NSFontAttributeName: labelFont, NSForegroundColorAttributeName: labelTextColor])
+                attributes: [NSAttributedStringKey.font: labelFont, NSAttributedStringKey.foregroundColor: labelTextColor])
         }
     }
     
@@ -214,7 +214,7 @@ open class YAxisRenderer: AxisRendererBase
         }
     }
     
-    open var gridClippingRect: CGRect
+    @objc open var gridClippingRect: CGRect
     {
         var contentRect = viewPortHandler?.contentRect ?? CGRect.zero
         let dy = self.axis?.gridLineWidth ?? 0.0
@@ -223,7 +223,7 @@ open class YAxisRenderer: AxisRendererBase
         return contentRect
     }
     
-    open func drawGridLine(
+    @objc open func drawGridLine(
         context: CGContext,
         position: CGPoint)
     {
@@ -250,7 +250,7 @@ open class YAxisRenderer: AxisRendererBase
         context.strokePath()
     }
     
-    open func transformedPositions() -> [CGPoint]
+    @objc open func transformedPositions() -> [CGPoint]
     {
         guard
             let yAxis = self.axis as? YAxis,
@@ -273,7 +273,7 @@ open class YAxisRenderer: AxisRendererBase
     }
 
     /// Draws the zero line at the specified position.
-    open func drawZeroLine(context: CGContext)
+    @objc open func drawZeroLine(context: CGContext)
     {
         guard
             let yAxis = self.axis as? YAxis,
@@ -386,7 +386,7 @@ open class YAxisRenderer: AxisRendererBase
                             x: viewPortHandler.contentRight - xOffset,
                             y: position.y - yOffset),
                         align: .right,
-                        attributes: [NSFontAttributeName: l.valueFont, NSForegroundColorAttributeName: l.valueTextColor])
+                        attributes: [NSAttributedStringKey.font: l.valueFont, NSAttributedStringKey.foregroundColor: l.valueTextColor])
                 }
                 else if l.labelPosition == .rightBottom
                 {
@@ -396,7 +396,7 @@ open class YAxisRenderer: AxisRendererBase
                             x: viewPortHandler.contentRight - xOffset,
                             y: position.y + yOffset - labelLineHeight),
                         align: .right,
-                        attributes: [NSFontAttributeName: l.valueFont, NSForegroundColorAttributeName: l.valueTextColor])
+                        attributes: [NSAttributedStringKey.font: l.valueFont, NSAttributedStringKey.foregroundColor: l.valueTextColor])
                 }
                 else if l.labelPosition == .leftTop
                 {
@@ -406,7 +406,7 @@ open class YAxisRenderer: AxisRendererBase
                             x: viewPortHandler.contentLeft + xOffset,
                             y: position.y - yOffset),
                         align: .left,
-                        attributes: [NSFontAttributeName: l.valueFont, NSForegroundColorAttributeName: l.valueTextColor])
+                        attributes: [NSAttributedStringKey.font: l.valueFont, NSAttributedStringKey.foregroundColor: l.valueTextColor])
                 }
                 else
                 {
@@ -416,7 +416,7 @@ open class YAxisRenderer: AxisRendererBase
                             x: viewPortHandler.contentLeft + xOffset,
                             y: position.y + yOffset - labelLineHeight),
                         align: .left,
-                        attributes: [NSFontAttributeName: l.valueFont, NSForegroundColorAttributeName: l.valueTextColor])
+                        attributes: [NSAttributedStringKey.font: l.valueFont, NSAttributedStringKey.foregroundColor: l.valueTextColor])
                 }
             }
         }
