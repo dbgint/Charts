@@ -16,10 +16,10 @@ import CoreGraphics
 open class BarChartView: BarLineChartViewBase, BarChartDataProvider
 {
     /// if set to true, all values are drawn above their bars, instead of below their top
-    fileprivate var _drawValueAboveBarEnabled = true
+    private var _drawValueAboveBarEnabled = true
 
     /// if set to true, a grey area is drawn behind each bar that indicates the maximum value
-    fileprivate var _drawBarShadowEnabled = false
+    private var _drawBarShadowEnabled = false
     
     /// if set to true, a rounded rectangle with the corners is drawn on each bar
     fileprivate var _drawRoundedBarEnabled = false
@@ -53,10 +53,10 @@ open class BarChartView: BarLineChartViewBase, BarChartDataProvider
         }
         
         // calculate axis range (min / max) according to provided data
-        _leftAxis.calculate(
+        leftAxis.calculate(
             min: data.getYMin(axis: .left),
             max: data.getYMax(axis: .left))
-        _rightAxis.calculate(
+        rightAxis.calculate(
             min: data.getYMin(axis: .right),
             max: data.getYMax(axis: .right))
     }
