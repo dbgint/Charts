@@ -1539,28 +1539,6 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
             _dragXEnabled = newValue
         }
     }
-
-    @objc open var dragYEnabled: Bool {
-        get 
-        {
-            return _dragYEnabled
-        }
-        set
-        {
-            _dragYEnabled = newValue
-        }
-    }
-
-    @objc open var dragXEnabled: Bool {
-        get
-        {
-            return _dragXEnabled
-        }
-        set
-        {
-            _dragXEnabled = newValue
-        }
-    }
     
     /// is dragging enabled? (moving the chart with the finger) for the chart (this does not affect scaling).
     @objc open var isDragEnabled: Bool
@@ -1569,7 +1547,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// is dragging on the X axis enabled?
-    open var dragXEnabled: Bool 
+    @objc open var dragXEnabled: Bool 
     {
         get
         {
@@ -1582,7 +1560,7 @@ open class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChartD
     }
     
     /// is dragging on the Y axis enabled?
-    open var dragYEnabled: Bool
+    @objc open var dragYEnabled: Bool
     {
         get
         {
