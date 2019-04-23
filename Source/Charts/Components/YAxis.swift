@@ -82,11 +82,8 @@ open class YAxis: AxisBase
     
     /// the side this axis object represents
     private var _axisDependency = AxisDependency.left
-<<<<<<< HEAD
     
     @objc open var extendGridlines = false
-=======
->>>>>>> remote322
     
     /// the minimum width that the axis should take
     /// 

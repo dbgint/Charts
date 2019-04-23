@@ -62,12 +62,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
     @objc open func drawDataSet(context: CGContext, dataSet: ICandleChartDataSet)
     {
         guard
-<<<<<<< HEAD
-            let dataProvider = dataProvider,
-            let chart = dataProvider as? CandleStickChartView
-=======
             let dataProvider = dataProvider
->>>>>>> remote322
             else { return }
 
         let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
@@ -82,11 +77,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
         
         context.setLineWidth(dataSet.shadowWidth)
 
-<<<<<<< HEAD
-        for j in stride(from: _xBounds.min, through: _xBounds.range + _xBounds.min, by: 1)
-=======
         for j in _xBounds
->>>>>>> remote322
         {
             // get the entry
             guard let e = dataSet.entryForIndex(j) as? CandleChartDataEntry else { continue }
@@ -265,11 +256,7 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
             }
 
             let axElement = createAccessibleElement(withIndex: j,
-<<<<<<< HEAD
-                                                    container: chart,
-=======
                                                     container: dataProvider,
->>>>>>> remote322
                                                     dataSet: dataSet)
             { (element) in
                 element.accessibilityLabel = "\(doesContainMultipleDataSets ? "\(dataSet.label ?? "Dataset")" : "") " + "\(xPos) - \(accessibilityMovementDescription). low: \(low), high: \(high), opening: \(open), closing: \(close)"

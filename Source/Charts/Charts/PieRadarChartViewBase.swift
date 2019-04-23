@@ -365,11 +365,7 @@ open class PieRadarChartViewBase: ChartViewBase
         fatalError("radius cannot be called on PieRadarChartViewBase")
     }
 
-<<<<<<< HEAD
-    /// - returns: The required offset for the chart legend.
-=======
     /// The required offset for the chart legend.
->>>>>>> remote322
     internal var requiredLegendOffset: CGFloat
     {
         fatalError("requiredLegendOffset cannot be called on PieRadarChartViewBase")
@@ -795,11 +791,7 @@ open class PieRadarChartViewBase: ChartViewBase
         }
     }
     
-<<<<<<< HEAD
-    /// - returns: The distance between two points
-=======
     /// - Returns: The distance between two points
->>>>>>> remote322
     private func distance(eventX: CGFloat, startX: CGFloat, eventY: CGFloat, startY: CGFloat) -> CGFloat
     {
         let dx = eventX - startX
@@ -807,11 +799,7 @@ open class PieRadarChartViewBase: ChartViewBase
         return sqrt(dx * dx + dy * dy)
     }
     
-<<<<<<< HEAD
-    /// - returns: The distance between two points
-=======
     /// - Returns: The distance between two points
->>>>>>> remote322
     private func distance(from: CGPoint, to: CGPoint) -> CGFloat
     {
         let dx = from.x - to.x

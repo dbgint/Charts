@@ -231,14 +231,9 @@ open class BarChartDataEntry: ChartDataEntry
     
     /// Calculates the sum across all values of the given stack.
     ///
-<<<<<<< HEAD
-    /// - parameter vals:
-    /// - returns:
-=======
     /// - Parameters:
     ///   - vals:
     /// - Returns:
->>>>>>> remote322
     private static func calcSum(values: [Double]?) -> Double
     {
         guard let values = values

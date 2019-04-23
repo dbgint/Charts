@@ -54,17 +54,10 @@ open class ChartDataSet: ChartBaseDataSet
     
     // MARK: - Data functions and accessors
 
-<<<<<<< HEAD
-    /// *
-    /// - note: Calls `notifyDataSetChanged()` after setting a new value.
-    /// - returns: The array of y-values that this DataSet represents.
-    /// the entries that this dataset represents / holds together
-=======
     /// - Note: Calls `notifyDataSetChanged()` after setting a new value.
     /// - Returns: The array of y-values that this DataSet represents.
     /// the entries that this dataset represents / holds together
     @available(*, deprecated, message: "Use `subscript(position:)` instead.")
->>>>>>> remote322
     @objc open var values: [ChartDataEntry]
         {
         didSet
@@ -98,15 +91,9 @@ open class ChartDataSet: ChartBaseDataSet
         _xMax = -Double.greatestFiniteMagnitude
         _xMin = Double.greatestFiniteMagnitude
 
-<<<<<<< HEAD
-        guard !values.isEmpty else { return }
-
-        values.forEach { calcMinMax(entry: $0) }
-=======
         guard !isEmpty else { return }
 
         forEach(calcMinMax)
->>>>>>> remote322
     }
     
     open override func calcMinMaxY(fromX: Double, toX: Double)
@@ -114,26 +101,14 @@ open class ChartDataSet: ChartBaseDataSet
         _yMax = -Double.greatestFiniteMagnitude
         _yMin = Double.greatestFiniteMagnitude
 
-<<<<<<< HEAD
-        guard !values.isEmpty else { return }
-=======
         guard !isEmpty else { return }
->>>>>>> remote322
         
         let indexFrom = entryIndex(x: fromX, closestToY: Double.nan, rounding: .down)
         let indexTo = entryIndex(x: toX, closestToY: Double.nan, rounding: .up)
         
         guard !(indexTo < indexFrom) else { return }
-<<<<<<< HEAD
-        
-        (indexFrom...indexTo).forEach {
-            // only recalculate y
-            calcMinMaxY(entry: values[$0])
-        }
-=======
         // only recalculate y
         self[indexFrom...indexTo].forEach(calcMinMaxY)
->>>>>>> remote322
     }
     
     @objc open func calcMinMaxX(entry e: ChartDataEntry)
@@ -162,12 +137,8 @@ open class ChartDataSet: ChartBaseDataSet
     
     /// Updates the min and max x and y value of this DataSet based on the given Entry.
     ///
-<<<<<<< HEAD
-    /// - parameter e:
-=======
     /// - Parameters:
     ///   - e:
->>>>>>> remote322
     internal func calcMinMax(entry e: ChartDataEntry)
     {
         calcMinMaxX(entry: e)
@@ -186,14 +157,9 @@ open class ChartDataSet: ChartBaseDataSet
     /// The maximum x-value this DataSet holds
     open override var xMax: Double { return _xMax }
     
-<<<<<<< HEAD
-    /// - returns: The number of y-values this DataSet represents
-    open override var entryCount: Int { return values.count }
-=======
     /// The number of y-values this DataSet represents
     @available(*, deprecated, message: "Use `count` instead")
     open override var entryCount: Int { return count }
->>>>>>> remote322
     
     /// - Throws: out of bounds
     /// if `i` is out of bounds, it may throw an out-of-bounds exception
@@ -201,17 +167,10 @@ open class ChartDataSet: ChartBaseDataSet
     @available(*, deprecated, message: "Use `subscript(index:)` instead.")
     open override func entryForIndex(_ i: Int) -> ChartDataEntry?
     {
-<<<<<<< HEAD
-        guard i >= values.startIndex, i < values.endIndex else {
-            return nil
-        }
-        return values[i]
-=======
         guard i >= startIndex, i < endIndex else {
             return nil
         }
         return self[i]
->>>>>>> remote322
     }
     
     /// - Parameters:
@@ -229,11 +188,7 @@ open class ChartDataSet: ChartBaseDataSet
         let index = entryIndex(x: xValue, closestToY: yValue, rounding: rounding)
         if index > -1
         {
-<<<<<<< HEAD
-            return values[index]
-=======
             return self[index]
->>>>>>> remote322
         }
         return nil
     }
@@ -423,19 +378,7 @@ open class ChartDataSet: ChartBaseDataSet
     @available(*, deprecated, message: "Use `firstIndex(of:)` or `lastIndex(of:)`")
     open override func entryIndex(entry e: ChartDataEntry) -> Int
     {
-<<<<<<< HEAD
-        for i in 0 ..< values.count
-        {
-            if values[i] === e
-            {
-                return i
-            }
-        }
-        
-        return -1
-=======
         return firstIndex(of: e) ?? -1
->>>>>>> remote322
     }
     
     /// Adds an Entry to the DataSet dynamically.
@@ -448,15 +391,7 @@ open class ChartDataSet: ChartBaseDataSet
     @available(*, deprecated, message: "Use `append(_:)` instead")
     open override func addEntry(_ e: ChartDataEntry) -> Bool
     {
-<<<<<<< HEAD
-        calcMinMax(entry: e)
-
-        isIndirectValuesCall = true
-        values.append(e)
-        
-=======
         append(e)
->>>>>>> remote322
         return true
     }
     
@@ -472,17 +407,10 @@ open class ChartDataSet: ChartBaseDataSet
         calcMinMax(entry: e)
         
         isIndirectValuesCall = true
-<<<<<<< HEAD
-        if values.count > 0 && values.last!.x > e.x
-        {
-            var closestIndex = entryIndex(x: e.x, closestToY: e.y, rounding: .up)
-            while values[closestIndex].x < e.x
-=======
         if let last = last, last.x > e.x
         {
             var closestIndex = entryIndex(x: e.x, closestToY: e.y, rounding: .up)
             while self[closestIndex].x < e.x
->>>>>>> remote322
             {
                 closestIndex += 1
             }
@@ -490,11 +418,7 @@ open class ChartDataSet: ChartBaseDataSet
         }
         else
         {
-<<<<<<< HEAD
-            values.append(e)
-=======
             append(e)
->>>>>>> remote322
         }
         
         return true
@@ -514,89 +438,36 @@ open class ChartDataSet: ChartBaseDataSet
     /// - Returns: `true` if the entry was removed successfully, else if the entry does not exist
     open func remove(_ entry: ChartDataEntry) -> Bool
     {
-<<<<<<< HEAD
-        var removed = false
-        isIndirectValuesCall = true
-
-        for i in 0 ..< values.count
-        {
-            if values[i] === entry
-            {
-                values.remove(at: i)
-                removed = true
-                break
-            }
-        }
-
-        notifyDataSetChanged()
-
-        return removed
-=======
         guard let index = firstIndex(of: entry) else { return false }
         _ = remove(at: index)
         return true
->>>>>>> remote322
     }
 
     /// Removes the first Entry (at index 0) of this DataSet from the entries array.
     ///
-<<<<<<< HEAD
-    /// - returns: `true` if successful, `false` if not.
-    open override func removeFirst() -> Bool
-    {
-        let entry: ChartDataEntry? = values.isEmpty ? nil : values.removeFirst()
-=======
     /// - Returns: `true` if successful, `false` if not.
     @available(*, deprecated, message: "Use `func removeFirst() -> ChartDataEntry` instead.")
     open override func removeFirst() -> Bool
     {
         let entry: ChartDataEntry? = isEmpty ? nil : removeFirst()
->>>>>>> remote322
         return entry != nil
     }
     
     /// Removes the last Entry (at index size-1) of this DataSet from the entries array.
     ///
-<<<<<<< HEAD
-    /// - returns: `true` if successful, `false` if not.
-    open override func removeLast() -> Bool
-    {
-        let entry: ChartDataEntry? = values.isEmpty ? nil : values.removeLast()
-        return entry != nil
-    }
-    
-    /// Checks if this DataSet contains the specified Entry.
-    /// - returns: `true` if contains the entry, `false` if not.
-    open override func contains(_ e: ChartDataEntry) -> Bool
-    {
-        for entry in values
-        {
-            if entry == e
-            {
-                return true
-            }
-        }
-        
-        return false
-=======
     /// - Returns: `true` if successful, `false` if not.
     @available(*, deprecated, message: "Use `func removeLast() -> ChartDataEntry` instead.")
     open override func removeLast() -> Bool
     {
         let entry: ChartDataEntry? = isEmpty ? nil : removeLast()
         return entry != nil
->>>>>>> remote322
     }
 
     /// Removes all values from this DataSet and recalculates min and max value.
     @available(*, deprecated, message: "Use `removeAll(keepingCapacity:)` instead.")
     open override func clear()
     {
-<<<<<<< HEAD
-        values.removeAll(keepingCapacity: true)
-=======
         removeAll(keepingCapacity: true)
->>>>>>> remote322
     }
     
     // MARK: - Data functions and accessors
@@ -616,8 +487,6 @@ open class ChartDataSet: ChartBaseDataSet
         return copy
     }
 }
-<<<<<<< HEAD
-=======
 
 // MARK: MutableCollection
 extension ChartDataSet: MutableCollection {
@@ -698,4 +567,3 @@ extension ChartDataSet: RangeReplaceableCollection {
         self.values.removeAll(keepingCapacity: keepCapacity)
     }
 }
->>>>>>> remote322

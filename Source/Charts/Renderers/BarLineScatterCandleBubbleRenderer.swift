@@ -38,11 +38,7 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
         return XBounds(chart: chart, dataSet: dataSet, animator: animator)
     }
     
-<<<<<<< HEAD
-    /// - returns: `true` if the DataSet values should be drawn, `false` if not.
-=======
     /// - Returns: `true` if the DataSet values should be drawn, `false` if not.
->>>>>>> remote322
     internal func shouldDrawValues(forDataSet set: IChartDataSet) -> Bool
     {
         return set.isVisible && (set.isDrawValuesEnabled || set.isDrawIconsEnabled)
@@ -90,8 +86,6 @@ open class BarLineScatterCandleBubbleRenderer: DataRenderer
             range = Int(Double(self.max - self.min) * phaseX)
         }
     }
-<<<<<<< HEAD
-=======
 }
 
 extension BarLineScatterCandleBubbleRenderer.XBounds: RangeExpression {
@@ -126,5 +120,4 @@ extension BarLineScatterCandleBubbleRenderer.XBounds: Sequence {
     public func makeIterator() -> Iterator {
         return Iterator(bounds: self)
     }
->>>>>>> remote322
 }

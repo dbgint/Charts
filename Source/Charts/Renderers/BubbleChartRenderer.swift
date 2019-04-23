@@ -185,11 +185,7 @@ open class BubbleChartRenderer: BarLineScatterCandleBubbleRenderer
 
             let iconsOffset = dataSet.iconsOffset
 
-<<<<<<< HEAD
-            for j in _xBounds.min..._xBounds.range + _xBounds.min
-=======
             for j in _xBounds
->>>>>>> remote322
             {
                 guard let e = dataSet.entryForIndex(j) as? BubbleChartDataEntry else { break }
 

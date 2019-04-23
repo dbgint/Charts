@@ -94,11 +94,7 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     @objc open var noDataTextColor: NSUIColor = NSUIColor.black
 
     /// alignment of the no data text
-<<<<<<< HEAD
-    open var noDataTextAlignment: NSTextAlignment = .left
-=======
     @objc open var noDataTextAlignment: NSTextAlignment = .left
->>>>>>> remote322
 
     internal var _legendRenderer: LegendRenderer!
     
@@ -438,17 +434,11 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// Highlights any y-value at the given x-value in the given DataSet.
     /// Provide -1 as the dataSetIndex to undo all highlighting.
     /// This method will call the delegate.
-<<<<<<< HEAD
-    /// - parameter x: The x-value to highlight
-    /// - parameter dataSetIndex: The dataset index to search in
-    /// - parameter dataIndex: The data index to search in (only used in CombinedChartView currently)
-=======
     ///
     /// - Parameters:
     ///   - x: The x-value to highlight
     ///   - dataSetIndex: The dataset index to search in
     ///   - dataIndex: The data index to search in (only used in CombinedChartView currently)
->>>>>>> remote322
     @objc open func highlightValue(x: Double, dataSetIndex: Int, dataIndex: Int = -1)
     {
         highlightValue(x: x, dataSetIndex: dataSetIndex, dataIndex: dataIndex, callDelegate: true)
@@ -457,19 +447,12 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     /// Highlights the value at the given x-value and y-value in the given DataSet.
     /// Provide -1 as the dataSetIndex to undo all highlighting.
     /// This method will call the delegate.
-<<<<<<< HEAD
-    /// - parameter x: The x-value to highlight
-    /// - parameter y: The y-value to highlight. Supply `NaN` for "any"
-    /// - parameter dataSetIndex: The dataset index to search in
-    /// - parameter dataIndex: The data index to search in (only used in CombinedChartView currently)
-=======
     ///
     /// - Parameters:
     ///   - x: The x-value to highlight
     ///   - y: The y-value to highlight. Supply `NaN` for "any"
     ///   - dataSetIndex: The dataset index to search in
     ///   - dataIndex: The data index to search in (only used in CombinedChartView currently)
->>>>>>> remote322
     @objc open func highlightValue(x: Double, y: Double, dataSetIndex: Int, dataIndex: Int = -1)
     {
         highlightValue(x: x, y: y, dataSetIndex: dataSetIndex, dataIndex: dataIndex, callDelegate: true)
@@ -477,19 +460,12 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     
     /// Highlights any y-value at the given x-value in the given DataSet.
     /// Provide -1 as the dataSetIndex to undo all highlighting.
-<<<<<<< HEAD
-    /// - parameter x: The x-value to highlight
-    /// - parameter dataSetIndex: The dataset index to search in
-    /// - parameter dataIndex: The data index to search in (only used in CombinedChartView currently)
-    /// - parameter callDelegate: Should the delegate be called for this change
-=======
     ///
     /// - Parameters:
     ///   - x: The x-value to highlight
     ///   - dataSetIndex: The dataset index to search in
     ///   - dataIndex: The data index to search in (only used in CombinedChartView currently)
     ///   - callDelegate: Should the delegate be called for this change
->>>>>>> remote322
     @objc open func highlightValue(x: Double, dataSetIndex: Int, dataIndex: Int = -1, callDelegate: Bool)
     {
         highlightValue(x: x, y: .nan, dataSetIndex: dataSetIndex, dataIndex: dataIndex, callDelegate: callDelegate)
@@ -497,13 +473,6 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     
     /// Highlights the value at the given x-value and y-value in the given DataSet.
     /// Provide -1 as the dataSetIndex to undo all highlighting.
-<<<<<<< HEAD
-    /// - parameter x: The x-value to highlight
-    /// - parameter y: The y-value to highlight. Supply `NaN` for "any"
-    /// - parameter dataSetIndex: The dataset index to search in
-    /// - parameter dataIndex: The data index to search in (only used in CombinedChartView currently)
-    /// - parameter callDelegate: Should the delegate be called for this change
-=======
     ///
     /// - Parameters:
     ///   - x: The x-value to highlight
@@ -511,7 +480,6 @@ open class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     ///   - dataSetIndex: The dataset index to search in
     ///   - dataIndex: The data index to search in (only used in CombinedChartView currently)
     ///   - callDelegate: Should the delegate be called for this change
->>>>>>> remote322
     @objc open func highlightValue(x: Double, y: Double, dataSetIndex: Int, dataIndex: Int = -1, callDelegate: Bool)
     {
         guard let data = _data else

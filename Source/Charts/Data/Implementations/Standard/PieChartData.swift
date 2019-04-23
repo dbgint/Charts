@@ -23,11 +23,7 @@ open class PieChartData: ChartData
         super.init(dataSets: dataSets)
     }
 
-<<<<<<< HEAD
-    /// - returns: All DataSet objects this ChartData object holds.
-=======
     /// All DataSet objects this ChartData object holds.
->>>>>>> remote322
     @objc open override var dataSets: [IChartDataSet]
     {
         get

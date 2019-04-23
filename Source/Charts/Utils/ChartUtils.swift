@@ -36,13 +36,8 @@ extension FloatingPoint
         return self * 180 / .pi
     }
 
-<<<<<<< HEAD
-    /// - returns: An angle between 0.0 < 360.0 (not less than zero, less than 360)
-    /// NOTE: Value must be in degrees
-=======
     /// - Note: Value must be in degrees
     /// - Returns: An angle between 0.0 < 360.0 (not less than zero, less than 360)
->>>>>>> remote322
     var normalizedAngle: Self
     {
         let angle = truncatingRemainder(dividingBy: 360)

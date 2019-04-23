@@ -346,18 +346,11 @@ open class ChartData: NSObject
     /// 
     /// **IMPORTANT: This method does calculations at runtime, do not over-use in performance critical situations.**
     ///
-<<<<<<< HEAD
-    /// - parameter dataSets: the DataSet array to search
-    /// - parameter type:
-    /// - parameter ignorecase: if true, the search is not case-sensitive
-    /// - returns: The index of the DataSet Object with the given label. Sensitive or not.
-=======
     /// - Parameters:
     ///   - dataSets: the DataSet array to search
     ///   - type:
     ///   - ignorecase: if true, the search is not case-sensitive
     /// - Returns: The index of the DataSet Object with the given label. Sensitive or not.
->>>>>>> remote322
     internal func getDataSetIndexByLabel(_ label: String, ignorecase: Bool) -> Int
     {
         if ignorecase
@@ -388,11 +381,7 @@ open class ChartData: NSObject
         return -1
     }
     
-<<<<<<< HEAD
-    /// - returns: The labels of all DataSets as a string array.
-=======
     /// - Returns: The labels of all DataSets as a string array.
->>>>>>> remote322
     internal func dataSetLabels() -> [String]
     {
         var types = [String]()

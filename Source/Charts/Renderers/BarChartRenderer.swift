@@ -129,8 +129,6 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 var bottom = isInverted
                     ? (y >= 0.0 ? CGFloat(y) : 0)
                     : (y <= 0.0 ? CGFloat(y) : 0)
-<<<<<<< HEAD
-=======
                 
                 /* When drawing each bar, the renderer actually draws each bar from 0 to the required value.
                  * This drawn bar is then clipped to the visible chart rect in BarLineChartViewBase's draw(rect:) using clipDataToContent.
@@ -205,7 +203,6 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 //apply offset
                 top = isInverted ? top + topOffset : top - topOffset
                 bottom = isInverted ? bottom - bottomOffset : bottom + bottomOffset
->>>>>>> remote322
 
                 // multiply the height of the rect with the phase
                 // explicitly add 0 + topOffset to indicate this is changed after adding accessibility support (#3650, #3520)
@@ -218,35 +215,10 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     bottom *= CGFloat(phaseY)
                 }
 
-<<<<<<< HEAD
-                // When drawing with an auto calculated y-axis minimum, the renderer actually draws each bar from 0
-                // to the required value. This drawn bar is then clipped to the visible chart rect in BarLineChartViewBase's draw(rect:) using clipDataToContent.
-                // While this works fine when calculating the bar rects for drawing, it causes the accessibilityFrames to be oversized in some cases.
-                // This offset attempts to undo that unnecessary drawing when calculating barRects, particularly when not using custom axis minima.
-                // This allows the minimum to still be visually non zero, but the rects are only drawn where necessary.
-                // This offset calculation also avoids cases where there are positive/negative values mixed, since those won't need this offset.
-                var offset: CGFloat = 0.0
-                if let offsetView = dataProvider as? BarChartView {
-
-                    let offsetAxis = offsetView.leftAxis.isEnabled ? offsetView.leftAxis : offsetView.rightAxis
-
-                    if barData.yMin.sign != barData.yMax.sign { offset = 0.0 }
-                    else if !offsetAxis._customAxisMin {
-                        offset = CGFloat(offsetAxis.axisMinimum)
-                    }
-                }
-
-=======
->>>>>>> remote322
                 barRect.origin.x = left
                 barRect.origin.y = top
-<<<<<<< HEAD
-                barRect.size.height = bottom == top ? 0 : bottom - top + offset
-
-=======
                 barRect.size.width = right - left
                 barRect.size.height = bottom - top
->>>>>>> remote322
                 buffer.rects[bufferIndex] = barRect
                 bufferIndex += 1
             }
@@ -944,9 +916,6 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 
         if dataSet.isStacked, let vals = e.yValues
         {
-<<<<<<< HEAD
-            let stackLabel = dataSet.stackLabels[idx % stackSize]
-=======
             let labelCount = min(dataSet.colors.count, stackSize)
 
             let stackLabel: String?
@@ -956,7 +925,6 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             } else {
                 stackLabel = nil
             }
->>>>>>> remote322
 
             elementValueText = dataSet.valueFormatter?.stringForValue(
                 vals[idx % stackSize],
@@ -968,15 +936,11 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
             elementValueText = stackLabel + " \(elementValueText)"
 =======
             if let stackLabel = stackLabel {
-                elementValueText = stackLabel + " \(elementValueText)"
-            } else {
-                elementValueText = "\(elementValueText)"
             }
 >>>>>>> remote322
         }
 
         let dataSetCount = dataProvider.barData?.dataSetCount ?? -1
-        let doesContainMultipleDataSets = dataSetCount > 1
 
         element.accessibilityLabel = "\(doesContainMultipleDataSets ? (dataSet.label ?? "")  + ", " : "") \(label): \(elementValueText)"
 

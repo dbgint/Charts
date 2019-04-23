@@ -220,11 +220,7 @@ open class AxisBase: ComponentBase
     
     /// The maximum number of labels on the axis
     @objc open var axisMaxLabels = Int(25) {
-<<<<<<< HEAD
-        didSet { axisMinLabels = axisMaxLabels > 0 ? axisMaxLabels : oldValue }
-=======
         didSet { axisMaxLabels = axisMaxLabels > 0 ? axisMaxLabels : oldValue }
->>>>>>> remote322
     }
     
     /// the number of label entries the axis should have

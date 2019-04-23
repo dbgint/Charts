@@ -89,11 +89,7 @@ open class ChartHighlighter : NSObject, IHighlighter
         return vals
     }
     
-<<<<<<< HEAD
-    /// - returns: An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.
-=======
     /// - Returns: An array of `Highlight` objects corresponding to the selected xValue and dataSetIndex.
->>>>>>> remote322
     internal func buildHighlights(
         dataSet set: IChartDataSet,
         dataSetIndex: Int,
