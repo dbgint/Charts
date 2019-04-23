@@ -221,11 +221,14 @@ open class YAxisRenderer: AxisRendererBase
         context: CGContext,
         position: CGPoint)
     {
+<<<<<<< HEAD
         guard
             let yAxis = self.axis as? YAxis
             else { return }
         
         let xoffset = yAxis.xOffset;
+=======
+>>>>>>> remote322
         context.beginPath()
         if yAxis.extendGridlines {
             if yAxis.axisDependency == .left {

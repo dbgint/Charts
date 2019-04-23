@@ -438,9 +438,24 @@ open class PieChartRenderer: DataRenderer
                         labelPoint = CGPoint(x: pt2.x + 5, y: pt2.y - lineHeight)
                     }
 
+<<<<<<< HEAD
                     if dataSet.valueLineColor != nil
+=======
+                    DrawLine: do
+>>>>>>> remote322
                     {
-                        context.setStrokeColor(dataSet.valueLineColor!.cgColor)
+                        if dataSet.useValueColorForLine
+                        {
+                            context.setStrokeColor(dataSet.color(atIndex: j).cgColor)
+                        }
+                        else if let valueLineColor = dataSet.valueLineColor
+                        {
+                            context.setStrokeColor(valueLineColor.cgColor)
+                        }
+                        else
+                        {
+                            return
+                        }
                         context.setLineWidth(dataSet.valueLineWidth)
 
                         context.move(to: CGPoint(x: pt0.x, y: pt0.y))

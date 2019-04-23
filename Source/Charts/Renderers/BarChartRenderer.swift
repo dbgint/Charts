@@ -108,6 +108,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
         var barRect = CGRect()
         var x: Double
         var y: Double
+
         
         for i in stride(from: 0, to: min(Int(ceil(Double(dataSet.entryCount) * animator.phaseX)), dataSet.entryCount), by: 1)
         {
@@ -128,9 +129,87 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 var bottom = isInverted
                     ? (y >= 0.0 ? CGFloat(y) : 0)
                     : (y <= 0.0 ? CGFloat(y) : 0)
+<<<<<<< HEAD
+=======
+                
+                /* When drawing each bar, the renderer actually draws each bar from 0 to the required value.
+                 * This drawn bar is then clipped to the visible chart rect in BarLineChartViewBase's draw(rect:) using clipDataToContent.
+                 * While this works fine when calculating the bar rects for drawing, it causes the accessibilityFrames to be oversized in some cases.
+                 * This offset attempts to undo that unnecessary drawing when calculating barRects
+                 *
+                 * +---------------------------------------------------------------+---------------------------------------------------------------+
+                 * |      Situation 1:  (!inverted && y >= 0)                      |      Situation 3:  (inverted && y >= 0)                       |
+                 * |                                                               |                                                               |
+                 * |        y ->           +--+       <- top                       |        0 -> ---+--+---+--+------   <- top                     |
+                 * |                       |//|        } topOffset = y - max       |                |  |   |//|          } topOffset = min         |
+                 * |      max -> +---------+--+----+  <- top - topOffset           |      min -> +--+--+---+--+----+    <- top + topOffset         |
+                 * |             |  +--+   |//|    |                               |             |  |  |   |//|    |                               |
+                 * |             |  |  |   |//|    |                               |             |  +--+   |//|    |                               |
+                 * |             |  |  |   |//|    |                               |             |         |//|    |                               |
+                 * |      min -> +--+--+---+--+----+  <- bottom + bottomOffset     |      max -> +---------+--+----+    <- bottom - bottomOffset   |
+                 * |                |  |   |//|        } bottomOffset = min        |                       |//|          } bottomOffset = y - max  |
+                 * |        0 -> ---+--+---+--+-----  <- bottom                    |        y ->           +--+         <- bottom                  |
+                 * |                                                               |                                                               |
+                 * +---------------------------------------------------------------+---------------------------------------------------------------+
+                 * |      Situation 2:  (!inverted && y < 0)                       |      Situation 4:  (inverted && y < 0)                        |
+                 * |                                                               |                                                               |
+                 * |        0 -> ---+--+---+--+-----   <- top                      |        y ->           +--+         <- top                     |
+                 * |                |  |   |//|         } topOffset = -max         |                       |//|          } topOffset = min - y     |
+                 * |      max -> +--+--+---+--+----+   <- top - topOffset          |      min -> +---------+--+----+    <- top + topOffset         |
+                 * |             |  |  |   |//|    |                               |             |  +--+   |//|    |                               |
+                 * |             |  +--+   |//|    |                               |             |  |  |   |//|    |                               |
+                 * |             |         |//|    |                               |             |  |  |   |//|    |                               |
+                 * |      min -> +---------+--+----+   <- bottom + bottomOffset    |      max -> +--+--+---+--+----+    <- bottom - bottomOffset   |
+                 * |                       |//|         } bottomOffset = min - y   |                |  |   |//|          } bottomOffset = -max     |
+                 * |        y ->           +--+        <- bottom                   |        0 -> ---+--+---+--+-------  <- bottom                  |
+                 * |                                                               |                                                               |
+                 * +---------------------------------------------------------------+---------------------------------------------------------------+
+                 */
+                var topOffset: CGFloat = 0.0
+                var bottomOffset: CGFloat = 0.0
+                if let offsetView = dataProvider as? BarChartView
+                {
+                    let offsetAxis = offsetView.getAxis(dataSet.axisDependency)
+                    if y >= 0
+                    {
+                        // situation 1
+                        if offsetAxis.axisMaximum < y
+                        {
+                            topOffset = CGFloat(y - offsetAxis.axisMaximum)
+                        }
+                        if offsetAxis.axisMinimum > 0
+                        {
+                            bottomOffset = CGFloat(offsetAxis.axisMinimum)
+                        }
+                    }
+                    else // y < 0
+                    {
+                        //situation 2
+                        if offsetAxis.axisMaximum < 0
+                        {
+                            topOffset = CGFloat(offsetAxis.axisMaximum * -1)
+                        }
+                        if offsetAxis.axisMinimum > y
+                        {
+                            bottomOffset = CGFloat(offsetAxis.axisMinimum - y)
+                        }
+                    }
+                    if isInverted
+                    {
+                        // situation 3 and 4
+                        // exchange topOffset/bottomOffset based on 1 and 2
+                        // see diagram above
+                        (topOffset, bottomOffset) = (bottomOffset, topOffset)
+                    }
+                }
+                //apply offset
+                top = isInverted ? top + topOffset : top - topOffset
+                bottom = isInverted ? bottom - bottomOffset : bottom + bottomOffset
+>>>>>>> remote322
 
                 // multiply the height of the rect with the phase
-                if top > 0
+                // explicitly add 0 + topOffset to indicate this is changed after adding accessibility support (#3650, #3520)
+                if top > 0 + topOffset
                 {
                     top *= CGFloat(phaseY)
                 }
@@ -139,6 +218,7 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     bottom *= CGFloat(phaseY)
                 }
 
+<<<<<<< HEAD
                 // When drawing with an auto calculated y-axis minimum, the renderer actually draws each bar from 0
                 // to the required value. This drawn bar is then clipped to the visible chart rect in BarLineChartViewBase's draw(rect:) using clipDataToContent.
                 // While this works fine when calculating the bar rects for drawing, it causes the accessibilityFrames to be oversized in some cases.
@@ -156,11 +236,17 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     }
                 }
 
+=======
+>>>>>>> remote322
                 barRect.origin.x = left
-                barRect.size.width = right - left
                 barRect.origin.y = top
+<<<<<<< HEAD
                 barRect.size.height = bottom == top ? 0 : bottom - top + offset
 
+=======
+                barRect.size.width = right - left
+                barRect.size.height = bottom - top
+>>>>>>> remote322
                 buffer.rects[bufferIndex] = barRect
                 bufferIndex += 1
             }
@@ -398,6 +484,21 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                     context.setLineWidth(borderWidth)
                     context.stroke(barRect)
                 }
+            }
+
+            // Create and append the corresponding accessibility element to accessibilityOrderedElements
+            if let chart = dataProvider as? BarChartView
+            {
+                let element = createAccessibleElement(withIndex: j,
+                                                      container: chart,
+                                                      dataSet: dataSet,
+                                                      dataSetIndex: index,
+                                                      stackSize: stackSize)
+                { (element) in
+                    element.accessibilityFrame = barRect
+                }
+
+                accessibilityOrderedElements[j/stackSize].append(element)
             }
 
             // Create and append the corresponding accessibility element to accessibilityOrderedElements
@@ -843,7 +944,19 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
 
         if dataSet.isStacked, let vals = e.yValues
         {
+<<<<<<< HEAD
             let stackLabel = dataSet.stackLabels[idx % stackSize]
+=======
+            let labelCount = min(dataSet.colors.count, stackSize)
+
+            let stackLabel: String?
+            if (dataSet.stackLabels.count > 0 && labelCount > 0) {
+                let labelIndex = idx % labelCount
+                stackLabel = dataSet.stackLabels.indices.contains(labelIndex) ? dataSet.stackLabels[labelIndex] : nil
+            } else {
+                stackLabel = nil
+            }
+>>>>>>> remote322
 
             elementValueText = dataSet.valueFormatter?.stringForValue(
                 vals[idx % stackSize],
@@ -851,7 +964,15 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 dataSetIndex: dataSetIndex,
                 viewPortHandler: viewPortHandler) ?? "\(e.y)"
 
+<<<<<<< HEAD
             elementValueText = stackLabel + " \(elementValueText)"
+=======
+            if let stackLabel = stackLabel {
+                elementValueText = stackLabel + " \(elementValueText)"
+            } else {
+                elementValueText = "\(elementValueText)"
+            }
+>>>>>>> remote322
         }
 
         let dataSetCount = dataProvider.barData?.dataSetCount ?? -1

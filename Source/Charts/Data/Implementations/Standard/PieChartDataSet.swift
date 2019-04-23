@@ -84,6 +84,12 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
     /// When valuePosition is OutsideSlice, indicates line color
     open var valueLineColor: NSUIColor? = NSUIColor.black
 
+<<<<<<< HEAD
+=======
+    /// When valuePosition is OutsideSlice and enabled, line will have the same color as the slice
+    open var useValueColorForLine: Bool = false
+
+>>>>>>> remote322
     /// When valuePosition is OutsideSlice, indicates line width
     open var valueLineWidth: CGFloat = 1.0
 
@@ -110,11 +116,29 @@ open class PieChartDataSet: ChartDataSet, IPieChartDataSet
 
     // MARK: - NSCopying
 
+<<<<<<< HEAD
     open override func copyWithZone(_ zone: NSZone?) -> AnyObject
+=======
+    open override func copy(with zone: NSZone? = nil) -> Any
+>>>>>>> remote322
     {
-        let copy = super.copyWithZone(zone) as! PieChartDataSet
+        let copy = super.copy(with: zone) as! PieChartDataSet
         copy._sliceSpace = _sliceSpace
+        copy.automaticallyDisableSliceSpacing = automaticallyDisableSliceSpacing
         copy.selectionShift = selectionShift
+<<<<<<< HEAD
+=======
+        copy.xValuePosition = xValuePosition
+        copy.yValuePosition = yValuePosition
+        copy.valueLineColor = valueLineColor
+        copy.valueLineWidth = valueLineWidth
+        copy.valueLinePart1OffsetPercentage = valueLinePart1OffsetPercentage
+        copy.valueLinePart1Length = valueLinePart1Length
+        copy.valueLinePart2Length = valueLinePart2Length
+        copy.valueLineVariableLength = valueLineVariableLength
+        copy.entryLabelFont = entryLabelFont
+        copy.entryLabelColor = entryLabelColor
+>>>>>>> remote322
         copy.highlightColor = highlightColor
         return copy
     }

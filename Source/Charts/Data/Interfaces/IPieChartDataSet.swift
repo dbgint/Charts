@@ -38,6 +38,12 @@ public protocol IPieChartDataSet: IChartDataSet
     /// When valuePosition is OutsideSlice, indicates line color
     var valueLineColor: NSUIColor? { get set }
 
+<<<<<<< HEAD
+=======
+    /// When valuePosition is OutsideSlice and enabled, line will have the same color as the slice
+    var useValueColorForLine: Bool { get set }
+
+>>>>>>> remote322
     /// When valuePosition is OutsideSlice, indicates line width
     var valueLineWidth: CGFloat { get set }
 
