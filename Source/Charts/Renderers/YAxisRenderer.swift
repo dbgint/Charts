@@ -222,8 +222,7 @@ open class YAxisRenderer: AxisRendererBase
         position: CGPoint)
     {
         guard
-            let yAxis = self.axis as? YAxis,
-            let viewPortHandler = self.viewPortHandler
+            let yAxis = self.axis as? YAxis
             else { return }
         
         let xoffset = yAxis.xOffset;
