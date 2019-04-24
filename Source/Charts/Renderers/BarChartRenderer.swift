@@ -932,15 +932,13 @@ open class BarChartRenderer: BarLineScatterCandleBubbleRenderer
                 dataSetIndex: dataSetIndex,
                 viewPortHandler: viewPortHandler) ?? "\(e.y)"
 
-<<<<<<< HEAD
-            elementValueText = stackLabel + " \(elementValueText)"
-=======
             if let stackLabel = stackLabel {
+                elementValueText = stackLabel + " \(elementValueText)"
             }
->>>>>>> remote322
         }
 
         let dataSetCount = dataProvider.barData?.dataSetCount ?? -1
+        let doesContainMultipleDataSets = dataSetCount > 1
 
         element.accessibilityLabel = "\(doesContainMultipleDataSets ? (dataSet.label ?? "")  + ", " : "") \(label): \(elementValueText)"
 
